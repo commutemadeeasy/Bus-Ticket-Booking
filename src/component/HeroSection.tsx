@@ -65,7 +65,7 @@ const HeroSection = () => {
           alt="Nepal Map"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-background/60 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-primary/20 via-background/60 to-background" />
       </div>
 
       {/* Animated Bus */}
