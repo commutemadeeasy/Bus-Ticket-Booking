@@ -13,20 +13,20 @@ import {
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-import { loginSchema, type LoginData } from "../../../validation/login/loginSchema/Loginschema";
+import { signUpSchema, type SignUpData } from "../../../validation/signUP/signUpSchema/SignUpSchema";
 
-const Login = () => {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<SignUpData>({
+    resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = (data: LoginData) => {
-    console.log("Form submitted:", data);
-    alert("Login form submitted (frontend only)");
+  const onSubmit = (data: SignUpData) => {
+    console.log("Sign Up submitted:", data);
+    alert("Sign Up form submitted (frontend only)");
   };
 
   return (
@@ -47,35 +47,68 @@ const Login = () => {
             </div>
             <div>
               <CardTitle className="font-display text-2xl">Nepal Bus Sewa</CardTitle>
-              <CardDescription>Book your journey across Nepal</CardDescription>
+              <CardDescription>Create your account to book journeys</CardDescription>
             </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
+              {/* Full Name */}
               <div className="space-y-2">
-                <Label htmlFor="signin-number">Phone Number</Label>
+                <Label htmlFor="signup-name">Full Name</Label>
                 <Input
-                  id="signin-number"
+                  id="signup-name"
                   type="text"
-                  placeholder="Enter your phone number"
-                  {...register("number")}
+                  placeholder="Enter your full name"
+                  {...register("fullName")}
                 />
-                {errors.number && (
-                  <p className="text-red-500 text-sm">{errors.number.message}</p>
+                {errors.fullName && (
+                  <p className="text-red-500 text-sm">{errors.fullName.message}</p>
                 )}
               </div>
+
+              {/* Phone Number */}
               <div className="space-y-2">
-                <Label htmlFor="signin-password">Password</Label>
+                <Label htmlFor="signup-phone">Phone Number</Label>
                 <Input
-                  id="signin-password"
+                  id="signup-phone"
+                  type="text"
+                  placeholder="Enter your phone number"
+                  {...register("phoneNumber")}
+                />
+                {errors.phoneNumber && (
+                  <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>
+                )}
+              </div>
+
+              {/* Password */}
+              <div className="space-y-2">
+                <Label htmlFor="signup-password">Password</Label>
+                <Input
+                  id="signup-password"
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder="Create a password"
                   {...register("password")}
                 />
                 {errors.password && (
                   <p className="text-red-500 text-sm">{errors.password.message}</p>
                 )}
               </div>
+
+              {/* Confirm Password */}
+              <div className="space-y-2">
+                <Label htmlFor="signup-confirm">Confirm Password</Label>
+                <Input
+                  id="signup-confirm"
+                  type="password"
+                  placeholder="Confirm your password"
+                  {...register("confirmPassword")}
+                />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
+                )}
+              </div>
+
+              {/* Submit Button */}
               <Button
                 type="submit"
                 className="w-full bg-secondaryorange hover:bg-secondaryorange/90 text-white"
@@ -84,22 +117,22 @@ const Login = () => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing in...
+                    Creating account...
                   </>
                 ) : (
-                  "Sign In"
+                  "Create Account"
                 )}
               </Button>
             </form>
 
-            {/* Sign Up link at the bottom */}
+            {/* Link to Sign In */}
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
+              Already have an account?{" "}
               <Link
-                to="/signUp"
+                to="/login"
                 className="text-primaryblue hover:underline font-medium"
               >
-                Sign Up
+                Sign In
               </Link>
             </p>
           </CardContent>
@@ -109,4 +142,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
