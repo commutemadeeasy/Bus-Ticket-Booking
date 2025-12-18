@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Bus } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     { label: 'About', href: '#about' },
@@ -36,7 +37,7 @@ const Header = () => {
                 {item.label}
               </a>
             ))}
-            <Button variant="blue" size="default">
+            <Button onClick={()=> navigate("/login")} variant="blue" size="default">
               Login
             </Button>
           </nav>
